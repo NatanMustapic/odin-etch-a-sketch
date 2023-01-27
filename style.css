@@ -1,10 +1,46 @@
+body {
+    background-image: url("img/wood-bg.jpg");
 
+}
 
-.grid-space {
+.heading-container {
+    text-align: center;
+    font-size: larger;
+}
+.main-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 100px;
+    max-width: 1100px;
+    margin: 0 auto;
+    background-color: burlywood;
+    border-radius: 10%;
+
+    
+}
+
+.btn-container {
     display: grid;
-    grid-gap: 1em;
+}
+
+input, button {
+    padding: 5px;
+    margin: 2px;
+}
+
+#color-input-value {
+    justify-self: center;
+}
+
+#grid-space {
+    display: inline-grid;
+    padding: 10px;
+    margin-top: 20px;
+    width: 500px;
+    height: 500px;
 }
 
 .grid-item {
-
+    padding: 20px;
 }

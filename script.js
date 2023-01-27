@@ -1,32 +1,48 @@
 const grid = document.getElementById("grid-space");
-const currentMode = "color";
-const currentColor = "black"
+const colorPicker = document.getElementById("color-input-value");
+const colorBtn = document.getElementById("colorBtn")
+const eraserBtn = document.getElementById("eraserBtn")
 
+console.log(grid)
+let currentMode = "color";
+let currentColor = "black";
 
-function createGrid(size) {
-    grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`
-    grid.style.gridTemplateRows = `repeat(${size}, 1fr)`
+colorPicker.oninput = (e) => changeColor(e.target.value)
+colorBtn.onclick = () => changeMode('color')
+eraserBtn.onclick = () => changeMode('eraser')
 
-    for (let i = 0; i < size * size; i++) {
-        const gridElement = document.createElement('div')
-        gridElement.classList.add('grid-item')
-        gridElement.addEventListener('mouseover', changeColor)
-        gridElement.addEventListener('mousedown', changeColor)
-        gridElement.style.border = "1px solid black"
-        grid.appendChild(gridElement)
-    }
-  };
-  
-  function changeColor(e) {
-    if (e.type === 'mouseover' && !mouseDown) return
-    if (currentMode === 'rainbow') {
-      const randomR = Math.floor(Math.random() * 256)
-      const randomG = Math.floor(Math.random() * 256)
-      const randomB = Math.floor(Math.random() * 256)
-      e.target.style.backgroundColor = `rgb(${randomR}, ${randomG}, ${randomB})`
-    } else if (currentMode === 'color') {
-      e.target.style.backgroundColor = currentColor
-    } else if (currentMode === 'eraser') {
-      e.target.style.backgroundColor = '#fefefe'
-    }
+function createGrid() {
+  grid.innerHTML = "";
+  var size = document.getElementById("grid-size-input-value").value;
+  grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+  grid.style.gridTemplateRows = `repeat(${size}, 1fr)`;
+
+  for (let i = 0; i < size * size; i++) {
+    const gridElement = document.createElement("div");
+    gridElement.classList.add("grid-item");
+    gridElement.addEventListener("mouseover", drawColor);
+    gridElement.addEventListener("mousedown", drawColor);
+    gridElement.style.border = "1px solid black";
+    gridElement.style.width = "10px";
+    grid.appendChild(gridElement);
   }
+}
+
+function drawColor(e) {
+  if (e.type === "mouseover" && !"mouseDown") return;
+  if (currentMode === "color") {
+    e.target.style.backgroundColor = currentColor;
+  } else if (currentMode === "eraser") {
+    e.target.style.backgroundColor = "burlywood";
+  }
+}
+
+
+function changeColor() {
+  currentColor = document.getElementById("color-input-value").value;
+}
+
+function changeMode(input) {
+  currentMode = input;
+  console.log(currentMode);
+}
