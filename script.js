@@ -1,17 +1,20 @@
+/* Constants */
 const grid = document.getElementById("grid-space");
 const colorPicker = document.getElementById("color-input-value");
 const colorBtn = document.getElementById("colorBtn")
 const eraserBtn = document.getElementById("eraserBtn")
 
-console.log(grid)
+/* Default values */
 let currentMode = "color";
 let currentColor = "black";
 
+/* Events */ 
 colorPicker.oninput = (e) => changeColor(e.target.value)
 colorBtn.onclick = () => changeMode('color')
 eraserBtn.onclick = () => changeMode('eraser')
 
-function createGrid() {
+/* Functions */
+function createGrid() {  /*Creates a grid of user inputed size*/
   grid.innerHTML = "";
   var size = document.getElementById("grid-size-input-value").value;
   grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
@@ -22,13 +25,13 @@ function createGrid() {
     gridElement.classList.add("grid-item");
     gridElement.addEventListener("mouseover", drawColor);
     gridElement.addEventListener("mousedown", drawColor);
-    gridElement.style.border = "1px solid black";
-    gridElement.style.width = "10px";
+    gridElement.style.border = ".5px solid black";
+    
     grid.appendChild(gridElement);
   }
 }
-
-function drawColor(e) {
+  
+function drawColor(e) { /* Enables "drawing" */
   if (e.type === "mouseover" && !"mouseDown") return;
   if (currentMode === "color") {
     e.target.style.backgroundColor = currentColor;
@@ -38,11 +41,11 @@ function drawColor(e) {
 }
 
 
-function changeColor() {
+function changeColor() {  /* Changes Color of the brush */
   currentColor = document.getElementById("color-input-value").value;
 }
 
-function changeMode(input) {
+function changeMode(input) { /* Changes modes for eraser/brush */
   currentMode = input;
   console.log(currentMode);
 }
